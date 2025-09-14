@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Member</title>
+    <!-- Importing Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Background Styling */
+        body {
+            background-image: url("{{ url_for('static', filename='library.jpeg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Form container styling */
+        .form-container {
+            margin: 50px auto;
+            max-width: 600px;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        label {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out, transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            margin-top: 10px;
+            display: inline-block;
+            text-align: center;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-back:hover {
+            background-color: #555555;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Add Member</h1>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter member name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="membership_id">Membership ID:</label>
+                    <input type="text" class="form-control" id="membership_id" name="membership_id" placeholder="Enter unique membership ID" required>
+                </div>
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-user-plus"></i> Add Member
+                </button>
+            </form>
+            <div class="text-center">
+                <a href="{{ url_for('home') }}" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importing Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

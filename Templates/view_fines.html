@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Fines</title>
+    <!-- Import Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='library.jpeg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .fines-container {
+            margin: 50px auto;
+            max-width: 80%;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th {
+            text-align: center;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        .table tbody td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+
+        .no-data {
+            text-align: center;
+            color: #6c757d;
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-back:hover {
+            background-color: #555555;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="fines-container">
+        <h1>My Fines</h1>
+        {% if borrow_list %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Due Date</th>
+                        <th>Fine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in borrow_list %}
+                    <tr>
+                        <td>{{ record['title'] }}</td>
+                        <td>{{ record['due_date'] }}</td>
+                        <td>${{ record['fine'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <form action="{{ url_for('pay_fine', membership_id=session['username']) }}" method="POST" class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-credit-card"></i> Pay Fines
+                </button>
+            </form>
+        {% else %}
+            <p class="no-data">No fines to display.</p>
+        {% endif %}
+        <div class="text-center">
+            <a href="{{ url_for('home') }}" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Import Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

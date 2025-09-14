@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Borrow List</title>
+    <!-- Importing Bootstrap CSS for base styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Importing FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Background Styling */
+        body {
+            background-image: url("{{ url_for('static', filename='library.jpeg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Table Container Styling */
+        .container {
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Align fine and dates to center */
+        .table td, .table th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Borrow List</h1>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Member Name</th>
+                    <th>Membership ID</th>
+                    <th>Borrow Date</th>
+                    <th>Due Date</th>
+                    <th>Fine</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if borrow_list %}
+                    {% for record in borrow_list %}
+                    <tr>
+                        <td>{{ record.title if record.title else 'N/A' }}</td>
+                        <td>{{ record.author if record.author else 'N/A' }}</td>
+                        <td>{{ record.isbn if record.isbn else 'N/A' }}</td>
+                        <td>{{ record.member_name if record.member_name else 'N/A' }}</td>
+                        <td>{{ record.membership_id if record.membership_id else 'N/A' }}</td>
+                        <td>{{ record.borrow_date if record.borrow_date else 'N/A' }}</td>
+                        <td>{{ record.due_date if record.due_date else 'N/A' }}</td>
+                        <td>
+                            {% if record.fine and record.fine > 0 %}
+                                <span class="text-danger font-weight-bold">${{ record.fine }}</span>
+                            {% else %}
+                                <span class="text-success">No Fine</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center">No records found</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
