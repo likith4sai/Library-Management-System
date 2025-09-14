@@ -22,27 +22,11 @@ The **Library Management System** is a web-based application designed to help li
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/library-management-system.git
+   git clone https://github.com/likith4sai/Library-Management-System.git
 Navigate to the project directory:
 
 cd library-management-system
-Import the database:
 
-Open your MySQL database tool (e.g., phpMyAdmin).
-Create a new database named library_management.
-Import the library_management.sql file located in the project directory.
-Configure the database connection:
-
-Open the config.php file in the project directory.
-Update the database credentials as needed:
-
-$servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "library_management";
-Start your local server and navigate to the project in your browser:
-
-http://localhost/library-management-system
 
 Usage
 Login: Access the system with user credentials.
